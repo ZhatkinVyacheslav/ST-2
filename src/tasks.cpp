@@ -1,6 +1,6 @@
-#Copyright Zhatkin Vyaceslav 2024
-#include "../include/circle.h"
+// Copyright Zhatkin Vyaceslav 2024
 #include <cmath>
+#include "../include/circle.h"
 
 #define EARTH_RADIUS 6378.1
 
@@ -19,5 +19,5 @@ double poolCost(double poolRadius, double roadWidth) {
     double fenceArea = pool.getArea() - pool.getArea()
         * cos(asin(roadWidth / (2 * poolRadius)));
 
-    return roadArea * 1000 + fenceArea * 2000;
+    return roadArea * 1000 + fenceArea * 200;
 }
