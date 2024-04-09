@@ -1,7 +1,7 @@
 // Copyright Zhatkin Vyacheslav 2024
 #include <cstdint>
 #include <cmath>
-#include "circle.h"
+#include "../include/circle.h"
 
 #define PI 3.14159265358979323846
 

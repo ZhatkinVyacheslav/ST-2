@@ -16,7 +16,8 @@ double ropeGap(double ropeLength) {
 double poolCost(double poolRadius, double roadWidth) {
     Circle pool(poolRadius);
     double roadArea = pool.getFerence() * roadWidth;
-    double fenceArea = pool.getArea() - pool.getArea() * cos(asin(roadWidth / (2 * poolRadius)));
+    double fenceArea = pool.getArea() - pool.getArea()
+        * cos(asin(roadWidth / (2 * poolRadius)));
 
     return roadArea * 1000 + fenceArea * 2000;
 }

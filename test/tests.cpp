@@ -1,8 +1,8 @@
 // Copyright Zhatkin Vyacheslav 2024
 #include <gtest/gtest.h>
 #include <cstdint>
-#include "circle.h"
-#include "tasks.h"
+#include "../include/circle.h"
+#include "../src/tasks.h"
 
 TEST(CircleTest, Constructor) {
     EXPECT_NO_THROW(Circle a(5));
@@ -51,33 +51,33 @@ TEST(TasksTest, PoolCost) {
 
 TEST(TasksTest, RopeGap_AdditionalTest1) {
     double ropeLength = 0.5;
-    double expectedGap = 0.0000001570796326794897; // Округление до семи знаков после запятой
+    double expectedGap = 0.0000001570796326794897;
     EXPECT_NEAR(ropeGap(ropeLength), expectedGap, 1e-7);
 }
 
 TEST(TasksTest, RopeGap_AdditionalTest2) {
     double ropeLength = 2;
-    double expectedGap = 0.0000006283185307179586; // Округление до семи знаков после запятой
+    double expectedGap = 0.0000006283185307179586;
     EXPECT_NEAR(ropeGap(ropeLength), expectedGap, 1e-7);
 }
 
 TEST(TasksTest, PoolCost_AdditionalTest1) {
     double poolRadius = 5;
     double roadWidth = 2;
-    double expectedCost = 262813.1185307179; // Округление до двух знаков после запятой
+    double expectedCost = 262813.1185307179;
     EXPECT_NEAR(poolCost(poolRadius, roadWidth), expectedCost, 0.01);
 }
 
 TEST(TasksTest, PoolCost_AdditionalTest2) {
     double poolRadius = 10;
     double roadWidth = 3;
-    double expectedCost = 449244.6492485928; // Округление до двух знаков после запятой
+    double expectedCost = 449244.6492485928;
     EXPECT_NEAR(poolCost(poolRadius, roadWidth), expectedCost, 0.01);
 }
 
 TEST(TasksTest, PoolCost_AdditionalTest3) {
     double poolRadius = 0.5;
     double roadWidth = 0.1;
-    double expectedCost = 78.53981633974483; // Округление до двух знаков после запятой
+    double expectedCost = 78.53981633974483;
     EXPECT_NEAR(poolCost(poolRadius, roadWidth), expectedCost, 0.01);
 }
