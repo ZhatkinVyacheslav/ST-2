@@ -1,23 +1,22 @@
 // Copyright Zhatkin Vyaceslav 2024
-#include <cmath>
-#include "../include/circle.h"
+#include "tasks.h"
+#include "circle.h"
 
-#define EARTH_RADIUS 6378.1
+const double EARTH_RADIUS = 6378.1 * 1000;
 
-double ropeGap(double ropeLength) {
+double earthAndRope(double ROPE_LENGTH) {
     Circle earth(EARTH_RADIUS);
-    double initialArea = earth.getArea();
-
-    earth.setRadius(earth.getRadius() + ropeLength);
-
-    return earth.getArea() - initialArea;
+    double newFerence = earth.getFerence() + ROPE_LENGTH;
+    Circle earth2(newFerence);
+    return earth2.getRadius() - earth.getRadius();
 }
 
-double poolCost(double poolRadius, double roadWidth) {
-    Circle pool(poolRadius);
-    double roadArea = pool.getFerence() * roadWidth;
-    double fenceArea = pool.getArea() - pool.getArea()
-        * cos(asin(roadWidth / (2 * poolRadius)));
+double poolCost(double POOL_RADIUS, double ROAD_WIDTH,
+    double CONCRETE_COST, double FENCE_COST) {
+    Circle pool(POOL_RADIUS);
+    Circle poolWithRoad(pool.getRadius() + ROAD_WIDTH);
+    double concreteArea = poolWithRoad.getArea() - pool.getArea();
+    double fenceFerence = poolWithRoad.getFerence();
 
-    return roadArea * 1000 + fenceArea * 200;
+    return concreteArea * CONCRETE_COST + fenceFerence * FENCE_COST;
 }

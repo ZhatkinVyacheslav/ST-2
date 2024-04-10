@@ -2,10 +2,8 @@
 #ifndef INCLUDE_TASKS_H_
 #define INCLUDE_TASKS_H_
 
-#pragma once
+double earthAndRope(double ROPE_LENGTH);
+double poolCost(double POOL_RADIUS, double ROAD_WIDTH,
+    double CONCRETE_COST, double FENCE_COST);
 
-double ropeGap(double ropeLength);
-
-double poolCost(double poolRadius, double roadWidth);
-
-#endif  // INCLUDE_TASKS_H_
+#endif // INCLUDE_TASKS_H_

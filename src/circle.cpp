@@ -1,30 +1,29 @@
 // Copyright Zhatkin Vyacheslav 2024
-#include <cstdint>
+#include "circle.h"
 #include <cmath>
-#include "../include/circle.h"
+#include <cstdint>
 
-#define PI 3.14159265358979323846
 
-Circle::Circle(double r) {
-    setRadius(r);
+Circle::Circle(double radius) {
+    setRadius(radius);
 }
 
-void Circle::setRadius(double r) {
-    radius = r;
-    ference = 2 * PI * radius;
-    area = PI * radius * radius;
+void Circle::setRadius(double radius) {
+    this->radius = radius;
+    ference = 2 * M_PI * radius;
+    area = M_PI * radius * radius;
 }
 
-void Circle::setFerence(double f) {
-    ference = f;
-    radius = ference / (2 * PI);
-    area = PI * radius * radius;
+void Circle::setFerence(double ference) {
+    this->ference = ference;
+    radius = ference / (2 * M_PI);
+    area = M_PI * radius * radius;
 }
 
-void Circle::setArea(double a) {
-    area = a;
-    radius = sqrt(area / PI);
-    ference = 2 * PI * radius;
+void Circle::setArea(double area) {
+    this->area = area;
+    radius = sqrt(area / M_PI);
+    ference = 2 * M_PI * radius;
 }
 
 double Circle::getRadius() const {
