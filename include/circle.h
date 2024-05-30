@@ -6,11 +6,11 @@
 #include <stdexcept>
 
 class Circle {
- private:
+private:
     double radius;
     double ference;
     double area;
- public:
+public:
     explicit Circle(double _r);
 
     void setRadius(double _rad);
