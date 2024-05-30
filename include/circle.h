@@ -15,7 +15,6 @@ class Circle {
     void setRadius(double radius);
     void setFerence(double ference);
     void setArea(double area);
-
     double getRadius() const;
     double getFerence() const;
     double getArea() const;
