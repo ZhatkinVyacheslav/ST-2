@@ -1,132 +1,151 @@
 // Copyright Zhatkin Vyacheslav 2024
-
-#include <gtest / gtest.h>
-#include <cstdint>
-#include "tasks.h"
+#include "gtest/gtest.h"
 #include "circle.h"
-#define PI 3.141592653589793238463
+#include "tasks.h"
 
-
-TEST(Circle, checkCreationWorks) {
-    EXPECT_NO_THROW(Circle(1.0));
+TEST(CircleTests, DefaultConstructor) {
+    Circle circle;
+    EXPECT_EQ(circle.getRadius(), 0.0);
+    EXPECT_EQ(circle.getFerence(), 0.0);
+    EXPECT_EQ(circle.getArea(), 0.0);
+}
+TEST(CircleTests, SetRadius) {
+    Circle circle;
+    circle.setRadius(5.0);
+    EXPECT_NEAR(circle.getRadius(), 5.0, 1e-8);
+    EXPECT_NEAR(circle.getFerence(), 31.4159265359, 1e-8);
+    EXPECT_NEAR(circle.getArea(), 78.5398163397, 1e-8);
 }
 
-TEST(Circle, checkZeroRadius) {
-    EXPECT_ANY_THROW(Circle(0.0));
+TEST(CircleTests, SetFerence) {
+    Circle circle;
+    circle.setFerence(10.0);
+    EXPECT_NEAR(circle.getRadius(), 1.59154943092, 1e-8);
+    EXPECT_NEAR(circle.getFerence(), 10.0, 1e-8);
 }
 
-TEST(Circle, checkNegativeRadius) {
-    EXPECT_ANY_THROW(Circle(-1.0));
+TEST(CircleTests, SetArea) {
+    Circle circle;
+    circle.setArea(50.0);
+    EXPECT_NEAR(circle.getRadius(), 3.98, 1e-1);
 }
 
-TEST(Circle, checkArea) {
-    Circle circle(1.0);
-
-    EXPECT_NEAR(circle.getArea(), PI, 0.01);
+TEST(CircleTests, GetRadius) {
+    Circle circle(2.5);
+    EXPECT_NEAR(circle.getRadius(), 2.5, 1e-8);
 }
 
-TEST(Circle, checkFerence) {
-    Circle circle(1.0);
-
-    EXPECT_NEAR(circle.getFerence(), 6.283, 0.01);
+TEST(CircleTests, GetFerence) {
+    Circle circle(2.5);
+    EXPECT_NEAR(circle.getFerence(), 15.7079632679, 1e-8);
 }
 
-TEST(Circle, checkCannotSetNegativeArea) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setArea(-1.0));
+TEST(CircleTests, GetArea) {
+    Circle circle(2.5);
+    EXPECT_NEAR(circle.getArea(), 19.6349540849, 1e-8);
 }
 
-TEST(Circle, checkCannotSetNegativeFerence) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setFerence(-1.0));
+TEST(CircleTests, BigRadius) {
+    Circle circle(1e9);
+    EXPECT_NEAR(circle.getRadius(), 1e9, 1e-8);
 }
 
-TEST(Circle, checkCannotSetNegativeRadius) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setRadius(-1.0));
+TEST(CircleTests, SmallRadius) {
+    Circle circle(1e-9);
+    EXPECT_NEAR(circle.getRadius(), 1e-9, 1e-8);
+    EXPECT_NEAR(circle.getFerence(), 6.28318530718e-9, 1e-8);
+    EXPECT_NEAR(circle.getArea(), 3.14159265359e-18, 1e-8);
 }
 
-TEST(Circle, checkCannotSetZeroArea) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setArea(0.0));
+TEST(CircleTests, ZeroRadius) {
+    Circle circle(0.0);
+    EXPECT_EQ(circle.getRadius(), 0.0);
+    EXPECT_EQ(circle.getFerence(), 0.0);
+    EXPECT_EQ(circle.getArea(), 0.0);
 }
 
-TEST(Circle, checkCannotSetZeroFerence) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setFerence(0.0));
+TEST(CircleTests, SetRadiusToZero) {
+    Circle circle(5.0);
+    circle.setRadius(0.0);
+    EXPECT_EQ(circle.getRadius(), 0.0);
+    EXPECT_EQ(circle.getFerence(), 0.0);
+    EXPECT_EQ(circle.getArea(), 0.0);
 }
 
-TEST(Circle, checkCannotSetZeroRadius) {
-    Circle circle(1.0);
-
-    EXPECT_ANY_THROW(circle.setRadius(0.0));
+TEST(CircleTests, SetFerenceToZero) {
+    Circle circle(5.0);
+    circle.setFerence(0.0);
+    EXPECT_EQ(circle.getRadius(), 0.0);
+    EXPECT_EQ(circle.getFerence(), 0.0);
+    EXPECT_EQ(circle.getArea(), 0.0);
 }
 
-TEST(Circle, checkWorksWithLargeRadius) {
-    Circle circle(100.0);
+TEST(CircleTests, SetAreaToZero) {
+    Circle circle(5.0);
+    circle.setArea(0.0);
+    EXPECT_EQ(circle.getRadius(), 0.0);
+    EXPECT_EQ(circle.getFerence(), 0.0);
+    EXPECT_EQ(circle.getArea(), 0.0);
+}
+TEST(CircleTests, SetAreaTwice) {
+    Circle circle;
+    circle.setArea(50.0);
+    EXPECT_NEAR(circle.getRadius(), 3.98, 1e-1);
+    EXPECT_NEAR(circle.getFerence(), 25.06, 1e-2);
+    EXPECT_NEAR(circle.getArea(), 50.0, 1e-2);
 
-    EXPECT_NEAR(circle.getArea(), 31415.926, 0.01);
-    EXPECT_NEAR(circle.getFerence(), 628.318, 0.01);
+    circle.setArea(100.0);
+    EXPECT_NEAR(circle.getRadius(), 5.64, 1e-1);
+    EXPECT_NEAR(circle.getFerence(), 35.44, 1e-2);
+    EXPECT_NEAR(circle.getArea(), 100.0, 1e-2);
 }
 
-TEST(Circle, checkWorksWithLargeArea) {
-    Circle circle(1.0);
-    circle.setArea(31415.0);
+TEST(CircleTests, SetFerenceTwice) {
+    Circle circle;
+    circle.setFerence(10.0);
+    EXPECT_NEAR(circle.getRadius(), 1.59, 1e-2);
+    EXPECT_NEAR(circle.getFerence(), 10.0, 1e-2);
+    EXPECT_NEAR(circle.getArea(), 7.95, 1e-2);
 
-    EXPECT_NEAR(circle.getRadius(), 100.0, 0.01);
-    EXPECT_NEAR(circle.getFerence(), 628.3, 0.01);
+    circle.setFerence(20.0);
+    EXPECT_NEAR(circle.getRadius(), 3.18, 1e-2);
+    EXPECT_NEAR(circle.getFerence(), 20.0, 1e-2);
+    EXPECT_NEAR(circle.getArea(), 31.83, 1e-2);
 }
 
-TEST(Circle, checkWorksWithLargeFerence) {
-    Circle circle(1.0);
-    circle.setFerence(1000);
-
-    EXPECT_NEAR(circle.getArea(), 79577.4669, 0.01);
-    EXPECT_NEAR(circle.getRadius(), 159.1549, 0.01);
+TEST(EarthAndRopeTests, EarthRadius) {
+    EXPECT_NEAR(earthAndRope(1.0), 33696685.2, 1e-1);
 }
 
-TEST(Tasks, checkRopeWorks) {
-    double planetRad = 1, ropeIncrement = 2;
-
-    EXPECT_NO_THROW(calculatePlanetAndRope(planetRad, ropeIncrement));
+TEST(EarthAndRopeTests, VeryLongRope) {
+    const double ropeLength = 1000000.0;
+    EXPECT_NEAR(earthAndRope(ropeLength), 34696684.2, 1e-1);
 }
 
-TEST(Tasks, checkRopeWrongInput) {
-    double planetRad = -1, ropeIncrement = 2;
-
-    EXPECT_ANY_THROW(calculatePlanetAndRope(planetRad, ropeIncrement));
+TEST(EarthAndRopeTests, VeryShortRope) {
+    const double ropeLength = 0.000001;
+    EXPECT_NEAR(earthAndRope(ropeLength), 33696684.2, 1e-1);
 }
 
-TEST(Tasks, checkSwimmingPoolWorks) {
-    double poolRad = 1, pathWidth = 2, costOfConcrete = 3, costOfFence = 4;
+TEST(PoolCostTests, PoolRadius) {
+    const double poolRadius = 3.0;
+    const double roadWidth = 1.0;
+    const double concreteCost = 1000.0;
+    const double fenceCost = 2000.0;
+    Circle pool(poolRadius);
+    Circle poolWithRoad(pool.getRadius() + roadWidth);
+    double concreteArea = poolWithRoad.getArea() - pool.getArea();
+    double fenceFerence = poolWithRoad.getFerence();
 
-    EXPECT_NO_THROW(calculateSwimmingPool(poolRad, pathWidth,
-        costOfConcrete, costOfFence));
+    EXPECT_EQ(poolCost(poolRadius, roadWidth, concreteCost, fenceCost),
+        concreteArea * concreteCost + fenceFerence * fenceCost);
 }
 
-TEST(Tasks, checkSwimmingPoolWrongInput) {
-    double poolRad = -1, pathWidth = 2, costOfConcrete = 3, costOfFence = 4;
-
-    EXPECT_ANY_THROW(calculateSwimmingPool(poolRad, pathWidth,
-        costOfConcrete, costOfFence));
-}
-
-TEST(Tasks, checkSwimmingPoolWorksWithData) {
-    double poolRad = 3, pathWidth = 1,
-        costOfConcrete = 1000, costOfFence = 2000;
-
-    EXPECT_NEAR(calculateSwimmingPool(poolRad, pathWidth,
-        costOfConcrete, costOfFence), 23000 * PI, 0.01);
-}
-
-TEST(Tasks, checkRopeWorksWithData) {
-    double planetRad = 6378.1, ropeIncrement = 0.01;
-
-    EXPECT_NEAR(calculatePlanetAndRope(planetRad, ropeIncrement),
-        0.001592, 0.01);
+TEST(PoolCostTests, CustomParameters) {
+    const double poolRadius = 2.5;
+    const double roadWidth = 0.5;
+    const double concreteCost = 800.0;
+    const double fenceCost = 1500.0;
+    EXPECT_NEAR(poolCost(poolRadius, roadWidth, concreteCost, fenceCost),
+        35185.8, 1e-1);
 }
