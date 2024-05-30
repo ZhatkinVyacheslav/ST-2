@@ -1,39 +1,65 @@
 // Copyright Zhatkin Vyacheslav 2024
-#include "circle.h"
-#include <cmath>
+
 #include <cstdint>
+#include <cmath>
+#include "circle.h"
+#define PI 3.141592653589793238463
 
-
-Circle::Circle(double radius) {
-    setRadius(radius);
+void recalculateRadius(double _rad, double* _fer, double* _ar) {
+    *(_fer) = PI * _rad * 2;
+    *(_ar) = PI * _rad * _rad;
 }
 
-void Circle::setRadius(double radius) {
-    this->radius = radius;
-    ference = 2 * M_PI * radius;
-    area = M_PI * radius * radius;
+void recalculateFerence(double* _rad, double _fer, double* _ar) {
+    *(_rad) = _fer / PI / 2;
+    *(_ar) = PI * *(_rad) * *(_rad);
 }
 
-void Circle::setFerence(double ference) {
-    this->ference = ference;
-    radius = ference / (2 * M_PI);
-    area = M_PI * radius * radius;
+void recalculateArea(double* _rad, double* _fer, double _ar) {
+    *(_rad) = sqrt(_ar / PI);
+    *(_fer) = PI * *(_rad) * 2;
 }
 
-void Circle::setArea(double area) {
-    this->area = area;
-    radius = sqrt(area / M_PI);
-    ference = 2 * M_PI * radius;
+Circle::Circle(double _rad) {
+    if (_rad <= 0) {
+        throw std::invalid_argument("Radius cannot be <= 0!");
+    }
+    radius = _rad;
+    recalculateRadius(radius, &ference, &area);
 }
 
-double Circle::getRadius() const {
+void Circle::setRadius(double _rad) {
+    if (_rad <= 0) {
+        throw std::invalid_argument("Radius cannot be <= 0!");
+    }
+    radius = _rad;
+    recalculateRadius(radius, &ference, &area);
+}
+
+void Circle::setFerence(double _fer) {
+    if (_fer <= 0) {
+        throw std::invalid_argument("Ference cannot be <= 0!");
+    }
+    ference = _fer;
+    recalculateFerence(&radius, ference, &area);
+}
+
+void Circle::setArea(double _ar) {
+    if (_ar <= 0) {
+        throw std::invalid_argument("Area cannot be <= 0!");
+    }
+    area = _ar;
+    recalculateArea(&radius, &ference, area);
+}
+
+double Circle::getRadius() {
     return radius;
 }
 
-double Circle::getFerence() const {
+double Circle::getFerence() {
     return ference;
 }
 
-double Circle::getArea() const {
+double Circle::getArea() {
     return area;
 }
