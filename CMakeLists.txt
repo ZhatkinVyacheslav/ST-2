@@ -1,9 +1,8 @@
-cmake_minimum_required (VERSION 3.10.2)
-project (ST-2)
+cmake_minimum_required(VERSION 3.10.2)
+project(ST-2)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -g")
-
 
 set(tool_dest "bin")
 set(lib_dest "lib")
@@ -16,6 +15,9 @@ FetchContent_Declare(
   GIT_TAG        release-1.10.0
 )
 FetchContent_MakeAvailable(googletest)
+
+# Указываем директорию с заголовочными файлами
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_subdirectory(src)
 add_subdirectory(test)
